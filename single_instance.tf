@@ -13,7 +13,7 @@ data "vsphere_host" "host" {
 }
 
 data "vsphere_compute_cluster" "cluster" {
-  name          = "CrestCluser"
+  name          = "${var.cluster_name}"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
@@ -28,12 +28,12 @@ data "vsphere_virtual_machine" "template_from_ovf" {
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  name             = "FizzBuzz-test-3-Terraform"
+  name             = "${var.instance_name}"
   resource_pool_id = "${data.vsphere_compute_cluster.cluster.resource_pool_id}"
   datastore_id     = "${data.vsphere_datastore.datastore.id}"
   host_system_id   = "${data.vsphere_host.host.id}"
-  num_cpus         = 2
-  memory           = 1024
+  num_cpus         = "${var.cpu_count}"
+  memory           = "${var.mem_in_mb}"
   guest_id         = "${data.vsphere_virtual_machine.template_from_ovf.guest_id}"
 
   scsi_type = "${data.vsphere_virtual_machine.template_from_ovf.scsi_type}"

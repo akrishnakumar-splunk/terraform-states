@@ -1,6 +1,21 @@
 variable "vsphere_user" {}
 variable "vsphere_password" {}
 variable "vsphere_server" {}
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
+variable "instance_name" {}
+
+variable "cpu_count" {
+  default = 2
+}
+
+variable "mem_in_mb" {
+  default = 1024
+}
+
+variable "cluster_name" {
+  default = "CrestCluser"
+}
 
 provider "vsphere" {
   user           = "${var.vsphere_user}"
@@ -9,4 +24,10 @@ provider "vsphere" {
 
   # If you have a self-signed cert
   allow_unverified_ssl = true
+}
+
+provider "aws" {
+  region     = "us-east-1"
+  access_key = "${var.aws_access_key}"
+  secret_key = "${var.aws_secret_key}"
 }
