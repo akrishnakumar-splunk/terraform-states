@@ -8,8 +8,8 @@ pipeline {
         PATH = "$TF_HOME:$PATH"
         DYNAMODB_STATELOCK = "vsph-tfstatelock"
         STATES_BUCKET = "vsph-states-bucket"
-        VSPH_ACCESS_KEY = credentials('tfstates_access_key')
-        VSPH_SECRET_KEY = credentials('tfstates_secret_key')
+        VSPH_ACCESS_KEY = "AKIAJXD6DGP7KWNGBSUQ"
+        VSPH_SECRET_KEY = "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"
     }
     stages {
         stage('Terraform Init'){
