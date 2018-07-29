@@ -15,6 +15,8 @@ terraform {
     access_key     = "AKIAJXD6DGP7KWNGBSUQ"
     secret_key     = "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"
     dynamodb_table = "vsph-tfstatelock"
+    region         = "us-east-1"
+    key            = "base"
   }
 }
 
