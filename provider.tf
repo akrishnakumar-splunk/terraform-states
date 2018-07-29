@@ -12,8 +12,8 @@ variable "cpu_count" {
 terraform {
   backend "s3" {
     bucket         = "vsph-states-bucket"
-    access_key     = "AKIAJXD6DGP7KWNGBSUQ"
-    secret_key     = "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"
+    access_key     = "AKIAJKDPIW6B6MXOZW5Q"
+    secret_key     = "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"
     dynamodb_table = "vsph-tfstatelock"
     region         = "us-east-1"
     key            = "base"
