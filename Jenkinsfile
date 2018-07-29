@@ -3,25 +3,18 @@ pipeline {
     tools {
         "org.jenkinsci.plugins.terraform.TerraformInstallation" "terraform-0.11.1"
     }
+    environment {
+        TF_VAR_cpu_count = "${cpuCount}"
+        TF_VAR_mem_in_mb = "${memInMB}"
+        TF_VAR_instance_name = "${name}"
+        TF_HOME = tool('terraform-0.11.1')
+        PATH = "$TF_HOME:$PATH"
+        DYNAMODB_STATELOCK = "vsph-tfstatelock"
+        STATES_BUCKET = "vsph-states-bucket"
+        VSPH_ACCESS_KEY = credentials('tfstates_access_key')
+        VSPH_SECRET_KEY = credentials('tfstates_secret_key')
+    }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        stage ('Setup Environment') {
-            steps {
-                def tfHome = tool('terraform-0.11.1')
-            env.PATH = "${tfHome}:${env.PATH}"
-            env.TF_VAR_cpu_count = "${cpuCount}"
-            env.TF_VAR_mem_in_mb = "${memInMB}"
-            env.TF_VAR_instance_name = "${name}"
-            env.DYNAMODB_STATELOCK = "vsph-tfstatelock"
-            env.STATES_BUCKET = "vsph-states-bucket"
-            env.VSPH_ACCESS_KEY = credentials('tfstates_access_key')
-            env.VSPH_SECRET_KEY = credentials('tfstates_secret_key')
-            }
-        }
         stage('Terraform Init'){
             steps {
                 sh 'terraform --version'
