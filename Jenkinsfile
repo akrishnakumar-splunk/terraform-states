@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        "org.jenkinsci.plugins.terraform.TerraformInstallation" "terraform-0.11.1"
+        "org.jenkinsci.plugins.jenkins-terraform.TerraformInstallation" "terraform-0.11.1"
     }
     environment {
         TF_VAR_cpu_count = "${cpuCount}"
