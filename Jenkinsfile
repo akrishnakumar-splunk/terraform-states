@@ -1,13 +1,10 @@
 pipeline {
     agent any
-    tools {
-        "org.jenkinsci.plugins.jenkins-terraform.TerraformInstallation" "terraform-0.11.1"
-    }
     environment {
         TF_VAR_cpu_count = "${cpuCount}"
         TF_VAR_mem_in_mb = "${memInMB}"
         TF_VAR_instance_name = "${name}"
-        TF_HOME = tool('terraform-0.11.1')
+        TF_HOME = tool('jenkins-terraform')
         PATH = "$TF_HOME:$PATH"
         DYNAMODB_STATELOCK = "vsph-tfstatelock"
         STATES_BUCKET = "vsph-states-bucket"
