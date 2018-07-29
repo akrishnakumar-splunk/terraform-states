@@ -54,6 +54,12 @@ resource "vsphere_virtual_machine" "vm" {
     template_uuid = "${data.vsphere_virtual_machine.template_from_ovf.id}"
   }
 
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = "admin"
+  }
+
   #   vapp {
   #     properties {
   #       "guestinfo.hostname"                        = "terraform-test.foobar.local"
