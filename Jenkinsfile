@@ -14,6 +14,7 @@ pipeline {
     stages {
         stage('Terraform Init'){
             steps {
+                sh "terraform init"
                 sh 'terraform --version'
             sh "terraform init -input=false -plugin-dir=/var/jenkins_home/terraform_plugins \
                 --backend-config='dynamodb_table=$DYNAMODB_STATELOCK' --backend-config='bucket=$STATES_BUCKET' \
