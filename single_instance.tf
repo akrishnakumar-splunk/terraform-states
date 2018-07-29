@@ -64,4 +64,15 @@ resource "vsphere_virtual_machine" "vm" {
   #       "guestinfo.dns.server.0"                    = "10.0.0.10"
   #     }
   #   }
+  provisioner "file" {
+    source      = "networking-cfg.sh"
+    destination = "/tmp/networking-cfg.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/networking-cfg.sh",
+      "/tmp/networking-cfg.sh",
+    ]
+  }
 }
