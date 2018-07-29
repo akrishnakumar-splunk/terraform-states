@@ -18,6 +18,7 @@ variable "cluster_name" {
 }
 
 provider "vsphere" {
+  version        = "~> 1.6"
   user           = "${var.vsphere_user}"
   password       = "${var.vsphere_password}"
   vsphere_server = "${var.vsphere_server}"
@@ -27,6 +28,7 @@ provider "vsphere" {
 }
 
 provider "aws" {
+  version    = "~> 1.29"
   region     = "us-east-1"
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
