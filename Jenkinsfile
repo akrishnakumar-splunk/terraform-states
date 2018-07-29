@@ -16,11 +16,12 @@ pipeline {
             steps {
                 sh "terraform init"
                 sh 'terraform --version'
-            sh "terraform init -input=false -plugin-dir=/var/lib/jenkins/workspace/ \
+                sh "terraform init -input=false -plugin-dir=/var/lib/jenkins/workspace/ \
                 --backend-config='dynamodb_table=$DYNAMODB_STATELOCK' --backend-config='bucket=$STATES_BUCKET' \
                 --backend-config='access_key=$VSPH_ACCESS_KEY' --backend-config='secret_key=$VSPH_SECRET_KEY'"
-            sh "echo \$PWD"
-            sh "whoami"
+                sh "terraform get"
+                sh "echo \$PWD"
+                sh "whoami"
             }
         }
         stage('Terraform Plan'){
