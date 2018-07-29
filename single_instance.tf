@@ -60,16 +60,6 @@ resource "vsphere_virtual_machine" "vm" {
     password = "admin"
   }
 
-  #   vapp {
-  #     properties {
-  #       "guestinfo.hostname"                        = "terraform-test.foobar.local"
-  #       "guestinfo.interface.0.name"                = "ens192"
-  #       "guestinfo.interface.0.ip.0.address"        = "10.0.0.100/24"
-  #       "guestinfo.interface.0.route.0.gateway"     = "10.0.0.1"
-  #       "guestinfo.interface.0.route.0.destination" = "0.0.0.0/0"
-  #       "guestinfo.dns.server.0"                    = "10.0.0.10"
-  #     }
-  #   }
   provisioner "file" {
     source      = "networking-cfg.sh"
     destination = "/tmp/networking-cfg.sh"
@@ -79,6 +69,18 @@ resource "vsphere_virtual_machine" "vm" {
     inline = [
       "chmod +x /tmp/networking-cfg.sh",
       "/tmp/networking-cfg.sh",
+    ]
+  }
+
+  provisioner "file" {
+    source      = "splunk-cfg.sh"
+    destination = "/tmp/splunk-cfg.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/splunk-cfg.sh",
+      "/tmp/splunk-cfg.sh",
     ]
   }
 }
