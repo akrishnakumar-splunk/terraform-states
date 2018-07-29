@@ -12,9 +12,8 @@ pipeline {
     stages {
         stage('Terraform Init'){
             steps {
-                sh "terraform init"
                 sh 'terraform --version'
-                sh "terraform init -input=false -plugin-dir=/var/lib/jenkins/workspace/ \
+                sh "terraform init -input=false \
                 --backend-config='dynamodb_table=$DYNAMODB_STATELOCK' --backend-config='bucket=$STATES_BUCKET' \
                 --backend-config='access_key=$VSPH_ACCESS_KEY' --backend-config='secret_key=$VSPH_SECRET_KEY'"
                 sh "terraform get"
