@@ -9,6 +9,15 @@ variable "cpu_count" {
   default = 2
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "vsph-states-bucket"
+    access_key     = "AKIAJXD6DGP7KWNGBSUQ"
+    secret_key     = "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"
+    dynamodb_table = "vsph-tfstatelock"
+  }
+}
+
 variable "mem_in_mb" {
   default = 1024
 }

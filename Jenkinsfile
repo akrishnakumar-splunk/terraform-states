@@ -13,9 +13,7 @@ pipeline {
         stage('Terraform Init'){
             steps {
                 sh 'terraform --version'
-                sh "terraform init -input=false \
-                --backend-config='dynamodb_table=$DYNAMODB_STATELOCK' --backend-config='bucket=$STATES_BUCKET' \
-                --backend-config='access_key=$VSPH_ACCESS_KEY' --backend-config='secret_key=$VSPH_SECRET_KEY'"
+                sh "terraform init -input=false"
                 sh "terraform get"
                 sh "echo \$PWD"
                 sh "whoami"
@@ -29,9 +27,7 @@ pipeline {
                         } catch (err) {
                             sh "terraform workspace select ${name}"
                         }
-                        sh "terraform init -input=false \
-                        --backend-config='dynamodb_table=$DYNAMODB_STATELOCK' --backend-config='bucket=$STATES_BUCKET' \
-                        --backend-config='access_key=$VSPH_ACCESS_KEY' --backend-config='secret_key=$VSPH_SECRET_KEY'"
+                        sh "terraform init -input=false"
                         sh "terraform get"
                         sh "terraform plan \
                         -out terraform-instance.tfplan;echo \$? > status"
