@@ -29,6 +29,10 @@ pipeline {
                         } catch (err) {
                             sh "terraform workspace select ${name}"
                         }
+                        sh "terraform init -input=false \
+                        --backend-config='dynamodb_table=$DYNAMODB_STATELOCK' --backend-config='bucket=$STATES_BUCKET' \
+                        --backend-config='access_key=$VSPH_ACCESS_KEY' --backend-config='secret_key=$VSPH_SECRET_KEY'"
+                        sh "terraform get"
                         sh "terraform plan -var 'aws_access_key=$VSPH_ACCESS_KEY' -var 'aws_secret_key=$VSPH_SECRET_KEY' \
                         -out terraform-instance.tfplan;echo \$? > status"
                         stash name: "terraform-instance-plan", includes: "terraform-instance.tfplan"
