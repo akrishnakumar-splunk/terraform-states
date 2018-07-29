@@ -28,7 +28,7 @@ pipeline {
                         sh "terraform init -input=false"
                         sh "terraform get"
                         sh "terraform plan \
-                        -out=terraform-instance.tfplan -var-file=terraform.tfvars"
+                        -out=terraform-instance.tfplan -var 'vsphere_user=$VSPHERE_USERNAME' -var 'vsphere_password=$VSPHERE_PASSWORD' -var 'vsphere_server=$VSPHERE_SERVER'"
                         stash name: "terraform-instance-plan", includes: "terraform-instance.tfplan"
                 }
             }
