@@ -46,7 +46,7 @@ pipeline {
                     }
                     if(apply){
                             unstash "terraform-instance-plan"
-                            sh "terraform apply terraform-instance.tfplan -var 'vsphere_user=$VSPHERE_USERNAME' -var 'vsphere_password=$VSPHERE_PASSWORD' -var 'vsphere_server=$VSPHERE_SERVER'"
+                            sh "terraform apply terraform-instance.tfplan"
                     }
             }
             }
