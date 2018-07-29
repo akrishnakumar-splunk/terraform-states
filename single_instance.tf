@@ -53,34 +53,4 @@ resource "vsphere_virtual_machine" "vm" {
   clone {
     template_uuid = "${data.vsphere_virtual_machine.template_from_ovf.id}"
   }
-
-  connection {
-    type     = "ssh"
-    user     = "root"
-    password = "admin"
-  }
-
-  provisioner "file" {
-    source      = "networking-cfg.sh"
-    destination = "/tmp/networking-cfg.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/networking-cfg.sh",
-      "/tmp/networking-cfg.sh",
-    ]
-  }
-
-  provisioner "file" {
-    source      = "splunk-cfg.sh"
-    destination = "/tmp/splunk-cfg.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/splunk-cfg.sh",
-      "/tmp/splunk-cfg.sh",
-    ]
-  }
 }

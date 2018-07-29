@@ -26,4 +26,3 @@ IPV6_PRIVACY="no"
 EOM
 
 systemctl restart network
-yum update -y
