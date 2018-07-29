@@ -27,8 +27,8 @@ pipeline {
                         }
                         sh "terraform init -input=false"
                         sh "terraform get"
-                        sh "terraform plan -input=false \
-                        -out terraform-instance.tfplan -var-file='terraform.tfvars';echo \$? > status"
+                        sh "terraform plan \
+                        -out terraform-instance.tfplan"
                         stash name: "terraform-instance-plan", includes: "terraform-instance.tfplan"
                 }
             }
