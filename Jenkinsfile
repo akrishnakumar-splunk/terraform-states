@@ -6,8 +6,6 @@ pipeline {
         TF_VAR_instance_name = "${name}"
         TF_HOME = tool('jenkins-terraform')
         PATH = "$TF_HOME:$PATH"
-        DYNAMODB_STATELOCK = "vsph-tfstatelock"
-        STATES_BUCKET = "vsph-states-bucket"
     }
     stages {
         stage('Terraform Init'){
