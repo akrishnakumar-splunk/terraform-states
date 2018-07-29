@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh "terraform init"
                 sh 'terraform --version'
-            sh "terraform init -input=false -plugin-dir=/var/jenkins_home/terraform_plugins \
+            sh "terraform init -input=false \
                 --backend-config='dynamodb_table=$DYNAMODB_STATELOCK' --backend-config='bucket=$STATES_BUCKET' \
                 --backend-config='access_key=$VSPH_ACCESS_KEY' --backend-config='secret_key=$VSPH_SECRET_KEY'"
             sh "echo \$PWD"
