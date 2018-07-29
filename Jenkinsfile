@@ -28,7 +28,7 @@ pipeline {
                         sh "terraform init -input=false"
                         sh "terraform get"
                         sh "terraform plan \
-                        -out terraform-instance.tfplan -var-file='terraform.tfvars'"
+                        -out terraform-instance.tfplan -var-file=terraform.tfvars"
                         stash name: "terraform-instance-plan", includes: "terraform-instance.tfplan"
                 }
             }
@@ -46,7 +46,7 @@ pipeline {
                     }
                     if(apply){
                             unstash "terraform-instance-plan"
-                            sh "terraform apply terraform-instance.tfplan -var-file='terraform.tfvars'"
+                            sh "terraform apply terraform-instance.tfplan -var-file=terraform.tfvars"
                     }
             }
             }
